@@ -1,0 +1,47 @@
+{% extends "contenido/padre.html" %} {% block titulo %} Contacto {% endblock %}
+{%block contenido %}
+<div class="container mt-4">
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h2 class="text-center mb-4">Solicitar información de Curso</h2>
+        <form>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" />
+          </div>
+
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo Electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="correo"
+              name="correo"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="curso" class="form-label">Curso</label>
+            <select class="form-select" id="curso" name="curso">
+              <option>Base de datos</option>
+              <option>Programación</option>
+              <option>Desarrollo Web Integral</option>
+              <option>Matemáticas para Ingeniería</option>
+              <option>Inglés VIII</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="comentarios" class="form-label">Comentarios</label>
+            <textarea class="form-control" id="comentarios" rows="5"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-dark">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
