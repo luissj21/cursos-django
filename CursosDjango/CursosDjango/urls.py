@@ -18,12 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from contenido import views #Se importa el modulo views desde la app contenido
 from django.conf import settings
+from cursos import views as views_cursos
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.principal, name="Principal"), #Ruta para llamar a la vista principal
-    path('cursos/', views.cursos, name="Cursos"), #Ruta para llamar a la vista cursos
+    path('curso/', views.cursos, name="Curso"), #Ruta para llamar a la vista cursos
     path('contacto/', views.contacto, name="Contacto"), #Ruta para llamar a la vista contacto
+    path('cursos/',views_cursos.consultas, name="Cursos"),
+    path('registrar/', views_cursos.registrarCurso, name="Registrar"),
+    path('<int:id>/editar/', views_cursos.editarCurso, name='Editar'),
+    path('cursos/<int:id>/eliminar/', views_cursos.eliminarCurso, name='Eliminar'),
+
 ]
 
 if settings.DEBUG:

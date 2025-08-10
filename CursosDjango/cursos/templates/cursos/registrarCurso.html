@@ -1,0 +1,92 @@
+{% extends 'contenido/padre.html' %} {% block titulo %}Agregar Curso
+{%endblock%} {% block contenido %} {% load static %}
+
+<h1 class="text-center mb-4">Agregar Nuevo Curso</h1>
+
+<div class="card shadow-sm mx-auto" style="max-width: 600px">
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        {{ form.titulo.label_tag }}
+        <input
+          type="text"
+          name="titulo"
+          class="form-control form-control-sm"
+          value="{{ form.titulo.value|default_if_none:'' }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        {{ form.descripcion.label_tag }}
+        <textarea name="descripcion" class="form-control form-control-sm">
+{{ form.descripcion.value|default_if_none:'' }}</textarea
+        >
+      </div>
+
+      <div class="mb-3">
+        {{ form.profesor.label_tag }}
+        <input
+          type="text"
+          name="profesor"
+          class="form-control form-control-sm"
+          value="{{ form.profesor.value|default_if_none:'' }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        {{ form.imagen.label_tag }}
+        <input type="file" name="imagen" class="form-control form-control-sm" />
+      </div>
+
+      <div class="form-check mb-3">
+        <input
+          type="checkbox"
+          name="disponibilidad"
+          class="form-check-input"
+          id="id_disponibilidad"
+          {%
+          if
+          form.disponibilidad.value
+          %}checked{%
+          endif
+          %}
+        />
+        <label class="form-check-label" for="id_disponibilidad"
+          >{{ form.disponibilidad.label }}</label
+        >
+      </div>
+
+      <div class="mb-3">
+        {{ form.precio.label_tag }}
+        <input
+          type="number"
+          step="0.01"
+          name="precio"
+          class="form-control form-control-sm"
+          value="{{ form.precio.value|default_if_none:'' }}"
+        />
+      </div>
+
+      <div class="mb-3">
+        {{ form.duracion.label_tag }}
+        <input
+          type="text"
+          name="duracion"
+          class="form-control form-control-sm"
+          value="{{ form.duracion.value|default_if_none:'' }}"
+        />
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success btn-sm">Guardar</button>
+        <a href="{% url 'Cursos' %}" class="btn btn-secondary btn-sm"
+          >Cancelar</a
+        >
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

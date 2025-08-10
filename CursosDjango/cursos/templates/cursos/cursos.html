@@ -1,0 +1,51 @@
+{% extends 'contenido/padre.html' %} {% block titulo %}Listado de Cursos
+{%endblock %} {% block contenido %} {% load static %}
+<h1 class="text-center mb-4">Lista de cursos</h1>
+<a href="{% url 'Registrar' %}" class="btn btn-primary mb-3">Nuevo Curso</a>
+
+<div class="row">
+  {% for curso in cursos %}
+  <div class="col-md-3 mb-3">
+    <div class="card h-100">
+      {% if curso.imagen %}
+      <img
+        src="{{ curso.imagen.url }}"
+        class="card-img-top"
+        alt="{{ curso.titulo }}"
+      />
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ curso.titulo }}</h5>
+        <p class="card-text">{{ curso.descripcion }}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <strong>Profesor:</strong> {{ curso.profesor }}
+          </li>
+          <li class="list-group-item">
+            <strong>Precio:</strong> ${{ curso.precio }}
+          </li>
+          <li class="list-group-item">
+            <strong>Duración:</strong> {{ curso.duracion }}
+          </li>
+          <li class="list-group-item">
+            <strong>Disponible:</strong>
+            {% if curso.disponibilidad %} Sí {% else %} No {% endif %}
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer text-end">
+        <a href="{% url 'Editar' curso.id %}" class="btn btn-sm btn-warning"
+          >Editar</a
+        >
+        <a href="{% url 'Eliminar' curso.id %}" class="btn btn-sm btn-danger">
+          Eliminar</a
+        >
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>No hay cursos disponibles.</p>
+  {% endfor %}
+</div>
+
+{% endblock %}

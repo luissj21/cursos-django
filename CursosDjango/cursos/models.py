@@ -1,5 +1,5 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 # Create your models here.
 class Curso(models.Model):
     titulo = models.CharField(max_length=100, verbose_name="Titulo del Curso")
@@ -16,3 +16,20 @@ class Curso(models.Model):
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
         ordering = ['created']
+
+    def __str__(self):
+        return self.titulo
+
+class Actividad(models.Model):
+    id = models.AutoField(primary_key=True, verbose_name="Clave de Actividad")
+    nombre = models.ForeignKey(Curso, on_delete=models.CASCADE, verbose_name="Nombre del curso")
+    descripcion = RichTextField(verbose_name="Descripcion de la actividad")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creacion")
+
+    class Meta:
+        verbose_name = "Actividad"
+        verbose_name_plural = "Actividades"
+        ordering = ["-created"]
+
+    def __str__(self):
+        return self.descripcion
